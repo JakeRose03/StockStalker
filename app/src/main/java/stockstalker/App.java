@@ -16,10 +16,21 @@ public class App {
 
         System.out.println("When " + stock + " drops gets to x alert me");
         int price = scanner.nextInt();
+        try{
+            QuoteResponse quote = FinnHubClient.getQuote(stock);
+            System.out.println(quote.getC()+ "" + quote.getD());
+            if(quote.getC()> price){
+                System.out.println(stock + " is above price");
+                System.out.println(stock + " is valued at " + quote.getC());
+            }else{
+                System.out.println("stock is below price");
+                System.out.println("stock is worth " + quote.getC());
+            }
 
-
-        if (price < 100){
-            System.out.println(stock + " is below " + price);
+            
+        }
+        catch(Exception e){
+            System.out.println("exception on req");
         }
 
         scanner.close();
