@@ -3,12 +3,26 @@
  */
 package stockstalker;
 
+import java.util.Scanner;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+       
+        //Get the stock and the price they want to be alerted at 
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Name of Stock you would like to track");
+        String stock = scanner.nextLine();
+
+        System.out.println("When " + stock + " drops gets to x alert me");
+        int price = scanner.nextInt();
+
+
+        if (price < 100){
+            System.out.println(stock + " is below " + price);
+        }
+
+        scanner.close();
+
     }
 }
