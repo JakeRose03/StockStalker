@@ -1,4 +1,4 @@
-package stockstalker;
+package stockstalker.model;
 
 import lombok.Getter;
 import lombok.Setter;

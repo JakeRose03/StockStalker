@@ -1,4 +1,4 @@
-package stockstalker;
+package stockstalker.config;
 
 import io.github.cdimascio.dotenv.Dotenv;
 

@@ -1,4 +1,4 @@
-package stockstalker;
+package stockstalker.clients;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -10,6 +10,9 @@ import java.net.http.HttpResponse.BodyHandlers;
 import com.google.gson.Gson;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import stockstalker.config.EnvConfig;
+import stockstalker.config.HttpClientProvider;
+import stockstalker.model.QuoteResponse;
 
 public class FinnHubClient {
     

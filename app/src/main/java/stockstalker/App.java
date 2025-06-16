@@ -3,7 +3,10 @@
  */
 package stockstalker;
 
+import java.util.HashMap;
 import java.util.Scanner;
+
+import stockstalker.worker.StockStalker;
 
 public class App {
 
@@ -11,29 +14,30 @@ public class App {
        
         //Get the stock and the price they want to be alerted at 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Name of Stock you would like to track");
-        String stock = scanner.nextLine();
 
-        System.out.println("When " + stock + " drops gets to x alert me");
-        int price = scanner.nextInt();
-        try{
-            QuoteResponse quote = FinnHubClient.getQuote(stock);
-            System.out.println(quote.getC()+ "" + quote.getD());
-            if(quote.getC()> price){
-                System.out.println(stock + " is above price");
-                System.out.println(stock + " is valued at " + quote.getC());
-            }else{
-                System.out.println("stock is below price");
-                System.out.println("stock is worth " + quote.getC());
-            }
-
-            
+        System.out.println("How many stocks would you like to keep track of ");
+        int numOfStock = scanner.nextInt();
+        scanner.nextLine();
+        HashMap<String, Integer> stockNames = new HashMap<>();
+        for(int i = 0; i < numOfStock; i++){
+            int j = i + 1;
+            System.out.println("What is the name of " + j + " stock you would like to track");
+            String stockName =scanner.nextLine();
+            System.out.println("What price would you like to be notified at ");
+            int price = scanner.nextInt();
+            scanner.nextLine();
+            stockNames.put(stockName, price);
         }
-        catch(Exception e){
-            System.out.println("exception on req");
+        int threadNum = 1;
+        for (HashMap.Entry<String, Integer> entry : stockNames.entrySet()) {
+            String stockName = entry.getKey();
+            Integer price = entry.getValue();
+            StockStalker stockStalker = new StockStalker(threadNum, stockName, price);
+            threadNum++;
+            stockStalker.start();
         }
-
         scanner.close();
+        System.out.println("Congrats you are now multhreading");
 
     }
 }

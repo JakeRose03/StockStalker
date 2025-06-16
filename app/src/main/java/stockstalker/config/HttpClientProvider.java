@@ -1,4 +1,4 @@
-package stockstalker;
+package stockstalker.config;
 import java.net.http.HttpClient;
 
 public class HttpClientProvider {
